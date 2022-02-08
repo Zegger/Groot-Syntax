@@ -1,0 +1,166 @@
+{
+    "name": "groot",
+    "author": "Zachary Goldstein",
+    "variables":
+    {
+        "black": "hsl(0, 0%, 0%)",
+        "black2": "hsl(60, 17%, 11%)",
+        "black3": "hsl(70, 8%, 15%)",
+        "blue": "hsl(190, 81%, 67%)",
+        "green": "hsl(81, 100%, 45%)",
+        "grey": "hsl(55, 8%, 26%)",
+        "lightgrey": "hsl(55, 8%, 60%)",
+        "orange": "hsl(32, 98%, 56%)",
+        "orange2": "hsl(30, 83%, 34%)",
+        "orange3": "hsl(47, 100%, 79%)",
+        "purple": "hsl(261, 100%, 75%)",
+        "purple2": "hsl(261, 100%, 40%)",
+        "red": "hsl(0, 93%, 59%)",
+        "red2": "hsl(338, 95%, 56%)",
+        "white": "hsl(0, 0%, 97%)",
+        "white2": "hsl(60, 36%, 96%)",
+        "white3": "hsl(60, 30%, 96%)",
+        "yellow": "hsl(54, 70%, 68%)",
+        "yellow2": "hsl(80, 76%, 53%)",
+        "yellow3": "hsl(60, 12%, 79%)",
+        "yellow4": "hsl(55, 11%, 22%)",
+        "yellow5": "hsl(50, 11%, 41%)"
+    },
+    "globals":
+    {
+        "foreground": "var(white3)",
+        "background": "var(black3)",
+        "caret": "color(var(white2) alpha(0.9))",
+        "block_caret": "color(var(white2) alpha(0.4))",
+        "invisibles": "color(var(white3) alpha(0.35))",
+        "line_highlight": "var(yellow4)",
+        "selection": "var(grey)",
+        "selection_border": "var(black2)",
+        "misspelling": "var(red2)",
+        "active_guide": "color(var(orange2) alpha(0.69))",
+        "find_highlight_foreground": "var(black)",
+        "find_highlight": "var(orange3)",
+        "brackets_options": "underline",
+        "brackets_foreground": "color(var(white3) alpha(0.65))",
+        "bracket_contents_options": "underline",
+        "bracket_contents_foreground": "color(var(white3) alpha(0.65))",
+        "tags_options": "stippled_underline"
+    },
+    "rules":
+    [
+        {
+            "name": "Class",
+            "scope": "keyword.class",
+            "foreground": "var(blue)",
+            "font_style": "italic"
+        },
+        {
+            "name": "ClassName",
+            "scope": "entity.name.class",
+            "foreground": "var(green)",
+            "font_style": "italic"
+        },
+        {
+            "name": "SubclassOf",
+            "scope": "keyword.subclass-of",
+            "foreground": "var(red2)"
+        },
+        {
+            "name": "ParentClass",
+            "scope": "entity.name.parent-class",
+            "foreground": "var(green)",
+            "font_style": "italic"
+        },
+        {
+            "name": "ivars",
+            "scope": "keyword.ivars",
+            "foreground": "var(red2)"
+        },
+        {
+            "name": "Method",
+            "scope": "keyword.method",
+            "foreground": "var(blue)",
+            "font_style": "italic"
+        },
+        {
+            "name": "MethodName",
+            "scope": "entity.name.method",
+            "foreground": "var(green)"
+            //"font_style": "italic"
+        },
+        {
+            "name": "Paramter",
+            "scope": "variable.paramter",
+            "foreground": "var(yellow5)"
+        },
+        {
+            "name": "LanguageVariable",
+            "scope": "variable.language",
+            "foreground": "var(orange)"
+        },
+        {
+            "name": "InstanceVariable",
+            "scope": "variable.other",
+            "foreground": "var(orange)"
+        },
+        {
+            "name": "Comment",
+            "scope": "comment",
+            "foreground": "var(yellow5)"
+        },
+        {
+            "name": "Number",
+            "scope": "literal.numeric",
+            "foreground": "var(purple)"
+        },
+        {
+            "name": "Character",
+            "scope": "literal.character",
+            "foreground": "var(yellow)"
+        },
+        {
+            "name": "String",
+            "scope": "string",
+            "foreground": "var(yellow)"
+        },
+        {
+            "name": "UnitTest",
+            "scope": "unit-test",
+            "foreground": "var(blue)"
+        },
+        {
+            "name": "Assignment",
+            "scope": "operator.assignment",
+            "foreground": "var(red2)"
+        },
+        {
+            "name": "Relational",
+            "scope": "operator.relational",
+        },
+        {
+            "name": "Binary",
+            "scope": "operator.binary"
+        },
+        {
+            "name": "Unary",
+            "scope": "operator.unary",
+        },
+        {
+            "name": "Keyword",
+            "scope": "keyword",
+            "foreground": "var(red2)"
+        },
+        {
+            "name": "InvalidSyntax",
+            "scope": "invalid.illegal.syntax",
+            "foreground": "var(white2)",
+            "background": "var(red2)"
+        },  
+        {
+            "name": "Stray-Bracket-End",
+            "scope": "invalid.illegal.stray-bracket-end",
+            "foreground": "var(white2)",
+            "background": "var(red2)"
+        }, 
+    ]
+}

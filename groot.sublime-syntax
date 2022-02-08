@@ -1,0 +1,194 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: Groot
+file_extensions:
+  - smt
+scope: source.groot
+
+variables:
+    bracket: |-
+      (?x)
+        (?: \( | \) | \[ | \] | \{ | \})
+    boundary: |-
+      (?x)
+        (?: {{bracket}} | \s+)
+    keyword: |-
+      (?x)
+        (?:
+          define | if | lambda | val | let | error | use | leaf
+        )
+
+    type_predicate: |-
+      (?x)
+        (?:
+          tree | leaf | int | float |
+          char | bool | function
+        )
+        (\?)
+    tree_funcs: |-
+      (?x)
+        (?:
+          tree | elm | sib | cld
+        )
+    integer_literal: \b(\+|-)?[0-9]+\b
+    float_literal: \b(\+|-)?[0-9]+\.[0-9]+\b
+    char_literal: \'([^\\]|\\.)\'
+    bool_literal: (#t|#f)
+    literal: |-
+      (?x)
+          (?:
+            {{integer_literal}} | {{float_literal}} |
+            {{char_literal}} | {{bool_literal}}
+          )
+    identifier: |-
+      (?x)
+        [\<\>\=\!A-Za-z_][A-Za-z_0-9\-\.\?\!\<\>\=]*
+
+    class_name: |-
+      (?x)
+      \b
+        (?!(\d+))
+        [A-Z]
+        ([^{{boundary}}]|:|x|=)*
+
+
+contexts:
+  # The prototype context is prepended to all contexts but those setting
+  # meta_include_prototype: false.
+  prototype:
+    - include: comments
+
+  main:
+    - include: brackets
+    - include: keyword
+    - include: literal
+
+  keyword:
+
+    - match : '\bval\s+'
+      scope : keyword
+      push  :
+        - match : '{{identifier}}'
+          scope : entity.name.method
+          pop : true
+
+    - match : '\bdefine\s+'
+      scope : keyword
+      push  :
+        - match : \(({{identifier}})((\s+{{identifier}})*)?\)
+          captures:
+            1: entity.name.method
+            2: variable.other
+          pop   : true
+        - match : \(\s*({{identifier}})\s*\)
+          captures:
+            1: entity.name.method
+          pop   : true
+
+    - match : '\blambda\s+'
+      scope : keyword
+      push  :
+        - match : \(((\s*{{identifier}}\s*)*)?\)
+          captures:
+            1: variable.other
+          pop   : true
+
+    - match : '\b{{tree_funcs}}\b'
+      scope: keyword.method
+
+    - match : '{{type_predicate}}'
+      scope: keyword.method
+
+    - match : '\b{{keyword}}\b'
+      scope : keyword
+
+  literal:
+    - match : '{{integer_literal}}'
+      scope : literal.numeric
+
+    - match : '{{bool_literal}}'
+      scope : literal.numeric
+
+    - match : '{{char_literal}}'
+      scope : string.quoted.single
+
+    - match : \'\(
+    # - match : \(({{identifier}})((\s+{{identifier}})*)?\)
+    #   scope : punctuation.definition.array.begin
+      push  : tree_literal
+
+    - match: \"
+      scope: punctuation.definition.string.begin
+      push: quoted_literal
+
+  quoted_literal:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double
+    - match: '\\.'
+      scope: constant.character.escape
+    - match: '"'
+      scope: punctuation.definition.string.end
+      pop: true
+
+  tree_literal:
+    - meta_include_prototype: false
+    - meta_scope: literal.numeric
+    - match : '{{char_literal}}'
+      scope : string.quoted.single
+    # - match : '{{literal}}'
+    #   scope : literal.numeric
+    - match : \(
+      scope : punctuation.definition.array.begin
+      push  : tree_literal
+    - match : \)
+      scope : punctuation.definition.array.end
+      pop   : true
+
+
+
+  comments:
+    # Comments begin with a ';' and finish at the end of the line.
+    - match: ';'
+      scope: punctuation.definition.comment
+      push:
+        - meta_scope: comment.line.semicolon
+        - match: $\n?
+          pop: true
+    - match: \(\*
+      push:
+        - meta_scope: comment.line.semicolon
+        - match: \*\)
+          pop: true
+
+  brackets:
+
+    - match: \(
+      push: round_bracket
+    - match: \)
+      scope: invalid.illegal.stray-bracket-end
+
+    - match: \[
+      push: square_bracket
+    - match: \]
+      scope: invalid.illegal.stray-bracket-end
+
+    - match: \{
+      push: curly_bracket
+    - match: \}
+      scope: invalid.illegal.stray-bracket-end
+
+  round_bracket:
+    - match: \)
+      pop: true
+    - include: main
+
+  square_bracket:
+    - match: \]
+      pop: true
+    - include: main
+
+  curly_bracket:
+    - match: \}
+      pop: true
+    - include: main

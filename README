@@ -1,0 +1,75 @@
+Groot Syntax Package
+
+
+Author:        Zachary Goldstein (zgolds01), Tufts University
+Created:       7  Feb 2022
+Last Modified: 7  Feb 2022
+
+
+Purpose:
+    - highlight Groot source according to grammar specification
+    - facilitate (relatively) painless Groot programming
+    - enable use of the native Sublime 'primary+/' commenting shortcut
+
+
+Acknowledgements
+    - the color scheme is inspired by Sublime's default syntax
+      highlighter for C
+    - http://www.sublimetext.com/docs/3/syntax.html
+    - https://www.sublimetext.com/docs/3/color_schemes.html
+    - https://sublime-text-unofficial-documentation.readthedocs.io/en/latest/reference/comments.html
+
+
+File Overview:
+
+    - README
+
+        See README, section 'File Overview'
+
+    - groot-comments.tmPreferences
+
+        This file contains a description of how Groot programs are commented,
+        which enables uSmallTalk programmers to use the native Sublime 'primary+/'
+        shortcut to conveniently comment-out highlighted text.
+
+        On Windows/Linux machines, the 'primary' key is CONTROL
+        On OSX machines, the 'primary' key is COMMAND
+
+    - groot.sublime-color-scheme
+
+        This file contains the styling data for each scope defined in the
+        'sublime-syntax' for Groot. If you want to change the color and/or 
+        styling for a particular scope, that can be done in this file.
+
+        You can read up on Sublime Text 3 color schemes here:
+            https://www.sublimetext.com/docs/3/color_schemes.html
+
+    - groot.sublime-settings
+
+        This file contains settings for this package. Crucially, it links the
+        'sublime-syntax' with the 'sublime-color-scheme'. This file also
+        disables the automatic matching of typed brackets; if you'd like
+        to re-enable that feature, set the 'auto_match_enabled' attribute
+        to 'true'
+
+    - groot.sublime-syntax
+
+        This file contains all the syntax highlighting rules. Scopes are
+        specified using 'regular expression' pattern matching (and since
+        Sublime in built on Python, we have access to a robust set of
+        'regex' tools). If you want to add additional scopes, that can be
+        done in this file.
+
+
+Additional Notes
+
+    - On the use of XML in "groot-comments.tmPreferences":
+
+        One advantge of Sublime 3 (over Sublime 2) is the ability to use
+        YAML in package development instead of XML. Confusingly, certain
+        Sublime 3 functionalities (like the native comment shortcut) are
+        not reliably supported by the considerly friendlier YAML.
+        Consequently, the native comment shortcut support must be implemented
+        in XML -- an unfortuante and archaic vestige of Sublime 2 package
+        development.
+        

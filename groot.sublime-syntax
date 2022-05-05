@@ -70,7 +70,7 @@ contexts:
       scope : keyword
       push  :
         - match : '{{identifier}}'
-          scope : entity.name.method
+          scope : none
           pop : true
 
     - match : '\bdefine\s+'

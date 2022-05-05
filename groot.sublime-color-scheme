@@ -77,6 +77,10 @@
             "foreground": "var(red2)"
         },
         {
+            "name": "Default",
+            "scope": "none",
+        },
+        {
             "name": "Method",
             "scope": "keyword.method",
             "foreground": "var(blue)",
